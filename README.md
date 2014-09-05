@@ -9,13 +9,12 @@ source ./setup.sh
 # I use skydns to permit containers to initiate communication with each other.
 docker pull crosbymichael/skydns
 docker pull crosbymichael/skydock
-startdns1
-startdns2
+skydns_start
+skydock_start
 
 # Then fire up two iCAT servers.
-irodsbuild
-irodsrunA
-irodsrunB
+irods_build
+irods_start
 ```
 
 
