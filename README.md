@@ -7,8 +7,6 @@ Then...
 source ./setup.sh
 
 # I use skydns to permit containers to initiate communication with each other.
-docker pull crosbymichael/skydns
-docker pull crosbymichael/skydock
 skydns_start
 skydock_start
 
