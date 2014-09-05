@@ -1,6 +1,6 @@
 #!/bin/bash
-IRODSUSER="ashok"
-IRODSENV="/var/www/scripts/irodsEnv.ashok"
+IRODSUSER="alice"
+IRODSENV="/var/www/scripts/irodsEnv.USER_A"
 IMGDIR="/var/www/images"
 
 cp $IRODSENV /home/admin/.irods/.irodsEnv

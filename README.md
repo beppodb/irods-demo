@@ -4,7 +4,7 @@ You need to have docker installed. And because this is so brittle, you need to h
 Then...
 
 ```
-source denv.sh
+source ./setup.sh
 
 # I use skydns to permit containers to initiate communication with each other.
 docker pull crosbymichael/skydns

@@ -3,7 +3,7 @@
   // Please acknowledge use of this code by including this header.
 
   $imagetypes = array("image/jpeg", "image/gif");
-  $stub = trim(file_get_contents('./stub')) . "/browse/index#treeView=detect&treeViewPath=&absPath=/zoneA/home/ashok/images/";
+  $stub = trim(file_get_contents('./stub')) . "/browse/index#treeView=detect&treeViewPath=&absPath=/zoneA/home/alice/images/";
   //echo $stub;
 
   function getImages($dir)

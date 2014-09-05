@@ -13,15 +13,15 @@
 ###########################################################
 
 # iRODS server host name:
-irodsHost 'irodsa.idrop-web.dev.docker'
+irodsHost 'irodsb.irods-demo.dev.docker'
 # iRODS server port number:
 irodsPort 1247
 # Default storage resource name:
 irodsDefResource 'demoResc'
 # Account name:
-irodsUserName 'ashok'
+irodsUserName 'bobby'
 # Zone:
-irodsZone 'zoneA'
+irodsZone 'zoneB'
 # Enable Advanced Client-Server negotiation:
 irodsClientServerNegotiation 'request_server_negotiation'
 # Client-Server connection policy:

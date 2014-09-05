@@ -133,7 +133,7 @@ Summer 2014 Edition
 
 This is a demonstration of some key features of iRODS.
 <br><br>It uses a data grid of two virtual machines, representing two separate administrative zones: "zoneA" and "zoneB".
-<br><br>Each zone has a single user: "ashok" on zoneA and "stan" on zoneB.
+<br><br>Each zone has a single user: "alice" on zoneA and "stan" on zoneB.
 
 ---
 # About this Demo...
@@ -156,8 +156,8 @@ This is a demonstration of some key features of iRODS.
 <br><br>(Resetting clears the underlying database and runs a setup script. It takes about 30 seconds for each system.)
 <br>
 ### Let's get started!
-<br><a href="http://danb-workstation.europa.renci.org:7080/reset_zoneA.php" target="_blank">Reset Zone A</a>
-&nbsp;&nbsp;<a href="http://danb-workstation.europa.renci.org:9080/reset_zoneB.php" target="_blank">Reset Zone B</a><br><br>
+<br><a href="http://template.example.org:7080/reset_zoneA.php" target="_blank">Reset Zone A</a>
+&nbsp;&nbsp;<a href="http://template.example.org:9080/reset_zoneB.php" target="_blank">Reset Zone B</a><br><br>
 
 ---
 class: middle, center, inverse
@@ -187,16 +187,16 @@ and data virtualization.
 # Demo: iRODS is for data discovery.
 
 --
-iRODS user "ashok" has added several image files with metadata tags.
+iRODS user "alice" has added several image files with metadata tags.
 
-<br><a href="http://danb-workstation.europa.renci.org:7443/idrop-web2" target="_blank">Log in to iDrop Web</a>
+<br><a href="http://template.example.org:7443/idrop-web2" target="_blank">Log in to iDrop Web</a>
 
-<br><a href="http://danb-workstation.europa.renci.org:7443/idrop-web2/tags/index" target="_blank">Explore tags with iDrop Web</a>
+<br><a href="http://template.example.org:7443/idrop-web2/tags/index" target="_blank">Explore tags with iDrop Web</a>
 
 ???
 # Demo 2 of 4: iRODS is for workflow automation.
 When a file is uploaded, a thumbnail is created.
-<br><br><a href="http://danb-workstation.europa.renci.org:7080/thumbnails" target="_blank">Thumbnails</a>
+<br><br><a href="http://template.example.org:7080/thumbnails" target="_blank">Thumbnails</a>
 (This Does Not Work Yet)
 
 ---
@@ -224,17 +224,17 @@ This process is called federation.
 
 ```bash
 # on zoneA (1247 is the default iRODS tcp port)
-iadmin mkzone zoneB remote irodsb.idrop-web.dev.docker:1247
+iadmin mkzone zoneB remote irodsb.irods-demo.dev.docker:1247
 iadmin mkuser stan#zoneB rodsuser
 
 # on zoneB
-iadmin mkzone zoneA remote irodsa.idrop-web.dev.docker:1247
-iadmin mkuser ashok#zoneA rodsuser
+iadmin mkzone zoneA remote irodsa.irods-demo.dev.docker:1247
+iadmin mkuser alice#zoneA rodsuser
 ```
 --
-.center[<br><a href="http://danb-workstation.europa.renci.org:7080/federate_zoneA.php" target="_blank">Enable Federation A->B</a>
-&nbsp;&nbsp;<a href="http://danb-workstation.europa.renci.org:9080/federate_zoneB.php" target="_blank">Enable Federation B->A</a>
-<br><br><a href="http://danb-workstation.europa.renci.org:7443/idrop-web2/browse/index#treeView=path&treeViewPath=/&absPath=/zoneB/home/stan/images/&browseOptionVal=info" target="_blank">iDrop Web</a>]
+.center[<br><a href="http://template.example.org:7080/federate_zoneA.php" target="_blank">Enable Federation A->B</a>
+&nbsp;&nbsp;<a href="http://template.example.org:9080/federate_zoneB.php" target="_blank">Enable Federation B->A</a>
+<br><br><a href="http://template.example.org:7443/idrop-web2/browse/index#treeView=path&treeViewPath=/&absPath=/zoneB/home/stan/images/&browseOptionVal=info" target="_blank">iDrop Web</a>]
 
 ---
 # Demo: iRODS is for data virtualization.
@@ -382,9 +382,9 @@ iadmin rmresc replResc
 ---
 # Demo: iRODS is for data virtualization.
 <br>
-.center[<a href="http://danb-workstation.europa.renci.org:7080/migratedemonew_zoneA.php" target="_blank">Migrate from demoResc to newResc</a>
-<br><br><a href="http://danb-workstation.europa.renci.org:7443/idrop-web2/browse/index#treeView=detect&treeViewPath=&absPath=/zoneA/home/ashok/images/ddn.jpg&browseOptionVal=info" target="_blank">iDrop Web</a>
-<br><br><a href="http://danb-workstation.europa.renci.org:7080/migratenewdemo_zoneA.php" target="_blank">Migrate from newResc to demoResc</a>
+.center[<a href="http://template.example.org:7080/migratedemonew_zoneA.php" target="_blank">Migrate from demoResc to newResc</a>
+<br><br><a href="http://template.example.org:7443/idrop-web2/browse/index#treeView=detect&treeViewPath=&absPath=/zoneA/home/alice/images/ddn.jpg&browseOptionVal=info" target="_blank">iDrop Web</a>
+<br><br><a href="http://template.example.org:7080/migratenewdemo_zoneA.php" target="_blank">Migrate from newResc to demoResc</a>
 <br><br><br><br>]
 ```bash
 iadmin mkresc $newResc 'unixfilesystem' $newPath
@@ -411,7 +411,12 @@ secure collaboration,<br>
 and data virtualization.
 
 ---
-Last Slide. Acknowledgment.
+class: center, middle
+
+<img src="slide_images/iRODS-Logo.png" width=40%>
+<br><br><br><br>
+##Thank you!
+
 
     </textarea>
     <script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">

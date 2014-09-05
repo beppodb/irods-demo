@@ -13,7 +13,7 @@
 ###########################################################
 
 # iRODS server host name:
-irodsHost 'irodsa.idrop-web.dev.docker'
+irodsHost 'irodsa.irods-demo.dev.docker'
 # iRODS server port number:
 irodsPort 1247
 # Default storage resource name:
