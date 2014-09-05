@@ -261,7 +261,7 @@ iRODS virtualizes data storage resources.
 
 In this demonstration, demoResc is our legacy filestore, and newResc is our new storage resource.
 
-.center[<img src="slide_images/repl2.png" width=40%><br>]
+.center[<img src="slide_images/repl2.png" width=50%><br>]
 
 ```bash
 iadmin mkresc $newResc 'unixfilesystem' $newPath
@@ -280,8 +280,8 @@ iadmin rmresc $demoResc
 # Demo: iRODS is for data virtualization.
 
 First, we tell iRODS about newResc.
-
-.center[<img src="slide_images/repl2.png" width=40%><br>]
+<br><br>
+.center[<img src="slide_images/repl2.png" width=50%><br>]
 
 ```bash
 *iadmin mkresc $newResc 'unixfilesystem' $newPath
@@ -301,7 +301,7 @@ iadmin rmresc $demoResc
 
 Next, we set up a replication resource, replResc, and build a tree with demoResc and newResc.
 
-.center[<img src="slide_images/repl3.png" width=40%><br>]
+.center[<img src="slide_images/repl3.png" width=50%><br>]
 
 ```bash
 iadmin mkresc $newResc 'unixfilesystem' $newPath
@@ -319,9 +319,10 @@ iadmin rmresc $demoResc
 ---
 # Demo: iRODS is for data virtualization.
 
-Then, we rebalance to synchronize files across the tree.
-
-.center[<img src="slide_images/repl3.png" width=40%><br>]
+Then, we "rebalance" to synchronize files across the tree.
+<br> For replication resources, "rebalance" means "replicate".
+<br>
+.center[<img src="slide_images/repl3.png" width=50%><br>]
 
 ```bash
 iadmin mkresc $newResc 'unixfilesystem' $newPath
@@ -336,12 +337,15 @@ itrim -rM -N 1 -S $demoResc /$zoneName
 iadmin rmresc $demoResc
 ```
 
+???
+Rebalance is a generic function name that applies differently to each different type of composable resource (e.g., tiering resources, performance-optimized resources).
+
 ---
 # Demo: iRODS is for data virtualization.
 
 Now that we've rebalanced, we can dismantle the tree.
-
-.center[<img src="slide_images/repl5.png" width=40%><br>]
+<br><br>
+.center[<img src="slide_images/repl5.png" width=50%><br>]
 
 ```bash
 iadmin mkresc $newResc 'unixfilesystem' $newPath
@@ -360,8 +364,8 @@ iadmin rmresc $demoResc
 # Demo: iRODS is for data virtualization.
 
 And finally, we can repurpose demoResc.
-
-.center[<img src="slide_images/repl6.png" width=40%><br>]
+<br><br>
+.center[<img src="slide_images/repl6.png" width=50%><br>]
 
 ```bash
 iadmin mkresc $newResc 'unixfilesystem' $newPath
@@ -376,10 +380,12 @@ iadmin rmresc replResc
 *iadmin rmresc $demoResc
 ```
 ---
+# Demo: iRODS is for data virtualization.
+<br>
 .center[<a href="http://danb-workstation.europa.renci.org:7080/migratedemonew_zoneA.php" target="_blank">Migrate from demoResc to newResc</a>
 <br><br><a href="http://danb-workstation.europa.renci.org:7443/idrop-web2/browse/index#treeView=detect&treeViewPath=&absPath=/zoneA/home/ashok/images/ddn.jpg&browseOptionVal=info" target="_blank">iDrop Web</a>
 <br><br><a href="http://danb-workstation.europa.renci.org:7080/migratenewdemo_zoneA.php" target="_blank">Migrate from newResc to demoResc</a>
-<br><br><br><br><br><br>]
+<br><br><br><br>]
 ```bash
 iadmin mkresc $newResc 'unixfilesystem' $newPath
 iadmin mkresc replResc replication
@@ -389,8 +395,8 @@ iadmin modresc replResc rebalance
 iadmin rmchildfromresc replResc $demoResc
 iadmin rmchildfromresc replResc $newResc
 iadmin rmresc replResc
-*itrim -rM -N 1 -S $demoResc /$zoneName
-*iadmin rmresc $demoResc
+itrim -rM -N 1 -S $demoResc /$zoneName
+iadmin rmresc $demoResc
 ```
 
 ---
