@@ -5,7 +5,6 @@ cp $IRODSENV /home/admin/.irods/.irodsEnv
 echo -e "$IRODSUSER\n" | iinit
 
 iadmin mkzone zoneB remote irodsb.idrop-web.dev.docker:1247
-iadmin mkuser rods#zoneB rodsuser
 iadmin mkuser stan#zoneB rodsuser
 
 sudo su -c "cp /var/www/scripts/server.configA /etc/irods/server.config" root
@@ -15,7 +14,6 @@ cp $IRODSENV /home/admin/.irods/.irodsEnv
 echo -e "$IRODSUSER\n" | iinit
 
 iadmin mkzone zoneA remote irodsa.idrop-web.dev.docker:1247
-iadmin mkuser rods#zoneA rodsuser
 iadmin mkuser ashok#zoneA rodsuser
 
 IRODSENV="/var/www/scripts/irodsEnv.stan"

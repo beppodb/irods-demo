@@ -26,22 +26,19 @@ RUN chown admin:admin /home/admin
 RUN chsh -s /bin/bash admin
 
 #install iRODS
-RUN wget -P /home/admin ftp://ftp.renci.org/pub/irods/releases/4.0.2/irods-database-plugin-postgres-1.2.deb
-RUN wget -P /home/admin ftp://ftp.renci.org/pub/irods/releases/4.0.2/irods-icat-4.0.2-64bit.deb
+RUN wget -P /home/admin ftp://ftp.renci.org/pub/irods/releases/4.0.3/irods-database-plugin-postgres-1.3.deb
+RUN wget -P /home/admin ftp://ftp.renci.org/pub/irods/releases/4.0.3/irods-icat-4.0.3-64bit.deb
 
 # install package dependencies to prevent Docker build from erring out
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y `dpkg -I /home/admin/irods-icat-4.0.2-64bit.deb | sed -n 's/^ Depends: //p' | sed 's/,//g'`
-RUN dpkg -i /home/admin/irods-icat-4.0.2-64bit.deb
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y `dpkg -I /home/admin/irods-icat-4.0.3-64bit.deb | sed -n 's/^ Depends: //p' | sed 's/,//g'`
+RUN dpkg -i /home/admin/irods-icat-4.0.3-64bit.deb
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y `dpkg -I /home/admin/irods-database-plugin-postgres-1.2.deb | sed -n 's/^ Depends: //p' | sed 's/,//g'`
-RUN dpkg -i /home/admin/irods-database-plugin-postgres-1.2.deb
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y `dpkg -I /home/admin/irods-database-plugin-postgres-1.3.deb | sed -n 's/^ Depends: //p' | sed 's/,//g'`
+RUN dpkg -i /home/admin/irods-database-plugin-postgres-1.3.deb
 
 # install php server
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server supervisor git apache2 libapache2-mod-php5 php5-mysql php5-gd php-pear php-apc curl && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin && mv /usr/local/bin/composer.phar /usr/local/bin/composer
 RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini
-
-# irods needs to be part of admin to execute supervisorctl
-RUN usermod -G admin -a irods
 
 # set up the iCAT database
 RUN service postgresql start && \
@@ -55,13 +52,13 @@ RUN chmod a+x /home/admin/server.sh
 #irods setup_database
 ADD ./icat/dbresp /home/admin/dbresp
 RUN service postgresql start && \ 
-  sudo su -c "/var/lib/irods/packaging/setup_database.sh </home/admin/dbresp" irods
+  sudo su -c "/var/lib/irods/packaging/setup_irods.sh </home/admin/dbresp"
+
+# irods needs to be part of admin to execute supervisorctl
+RUN usermod -G admin -a irods
 
 #change irods user's irodsEnv file to point to localhost, since it was configured with a transient Docker container's hostname
 RUN sed -i 's/^irodsHost.*/irodsHost localhost/' /var/lib/irods/.irods/.irodsEnv
-
-# disable strict ACLs
-ADD ./icat/core.re /etc/irods/core.re
 
 #begin idrop-web installation
 #set up tomcat and nginx
@@ -113,6 +110,14 @@ RUN usermod -a -G admin www-data
 RUN sed -i 's/%admin ALL=(ALL) ALL/%admin ALL=(ALL) NOPASSWD:ALL/' /etc/sudoers
 RUN mkdir /home/admin/.irods
 RUN chown admin:admin /home/admin/.irods
+
+# disable strict ACLs
+ADD ./icat/core.re /etc/irods/core.re
+RUN chown irods:irods /etc/irods/core.re
+ADD ./icat/makethumb.sh /var/lib/irods/iRODS/server/bin/cmd/makethumb.sh
+RUN chown irods:irods /var/lib/irods/iRODS/server/bin/cmd/makethumb.sh
+RUN chmod a+xr /var/lib/irods/iRODS/server/bin/cmd/makethumb.sh
+
 
 EXPOSE 22 80 8443 1247
 ENTRYPOINT /usr/bin/supervisord "-n"

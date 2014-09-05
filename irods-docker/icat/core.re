@@ -253,11 +253,16 @@ acSetMultiReplPerResc { }
 #acPostProcForPut {ON($objPath like "/tempZone/home/rods/mytest/*") {writeLine("serverLog","File Path is "++$filePath); } }
 #acPostProcForPut {ON($objPath like "/tempZone/home/rods/mytest/*") {writeLine("serverLog","File Path is "++$filePath); msiSplitPath($filePath,*fileDir,*fileName); msiExecCmd("send.sh", "*fileDir *fileName", "null", "null","null",*Junk); writeLine("serverLog","After File Path is *fileDir *fileName"); } }
 #acPostProcForPut { ON($objPath like "\*txt") {writeLine("serverLog","File $objPath"); } }
+#acPostProcForPut {ON(($objPath like "/zoneA/home/ashok/images/*") && ($oprType == 1)) {writeLine("serverLog","File Path is "++$filePath); msiSplitPath($filePath,*fileDir,*fileName); msiExecCmd("makethumb.sh", "*fileDir/*fileName", "null", "null","null",*Junk); writeLine("serverLog","After File Path is *fileDir *fileName"); } }
+#acPostProcForPut {writeLine("serverLog","acPostProcForPut file=$objPath"); }
 acPostProcForPut { }
 acPostProcForCopy { }
 acPostProcForFilePathReg { }
+# acPostProcForCreate {writeLine("serverLog","acPostProcForCreate file=$objPath"); }
 acPostProcForCreate { }
 # acPostProcForOpen {writeLine("serverLog",$objPath); }
+# acPostProcForOpen {ON($objPath like "/zoneA/home/ashok/images/*") { if (hasFlag($dataId, "make_thumb") >= 0) { writeLine("serverLog","acPostProcForOpen file Path is "++$filePath); msiSplitPath($filePath,*fileDir,*fileName); msiAddKeyVal(*KVP, "make_thumb", "1"); msiRemoveKeyValuePairsFromObj(*KVP, $objPath, "-d");  msiExecCmd("makethumb.sh", "*fileDir/*fileName", "null", "null","null",*Junk); writeLine("serverLog","acPostProcForOpen file Path is *fileDir *fileName"); } } }
+# acPostProcForOpen {writeLine("serverLog","acPostProcForOpen file=$objPath"); }
 acPostProcForOpen { }
 acPostProcForPhymv { }
 acPostProcForRepl { }
@@ -734,7 +739,26 @@ acRunWorkFlow(*File, *R_BUF) {
 #pep_resource_open_post(*OUT) { writeLine('serverLog','RULECALL :: pep_open_post [$pluginInstanceName] [*OUT]'); *OUT="CHANGED_VALUE"; }
 #pep_resource_read_pre(*OUT)  { writeLine('serverLog','RULECALL :: pep_read_pre  [$pluginInstanceName] [*OUT]'); *OUT="CHANGED_VALUE"; }
 #pep_resource_read_post(*OUT) { writeLine('serverLog','RULECALL :: pep_read_post [$pluginInstanceName] [*OUT]'); *OUT="CHANGED_VALUE"; }
+pep_resource_write_pre(*OUT) {
+ msiGetValByKey($KVPairs,"logical_path",*rodsPath);
+ writeLine('serverLog','RULECALL :: pep_resource_write_pre path=*rodsPath');
+ temporaryStorage().writing="1";
+}
 
+pep_resource_create_post(*OUT) {
+  msiGetValByKey($KVPairs,"physical_path",*phyPath);
+ msiGetValByKey($KVPairs,"logical_path",*filePath);
+ msiSplitPath(*filePath,*fileDir,*fileName);
+ writeLine('serverLog','RULECALL :: pep_resource_create_post path=*filePath');  
+ *errorcode = errormsg(*writing = temporaryStorage().writing,*outmsg); 
+ if (*errorcode == 0) {
+   if ((*writing == "1") && (*fileDir == "/zoneA/home/ashok/images")) {
+     temporaryStorage().writing="null";
+#     msiExecCmd("makethumb.sh", "*phyPath", "null", "null","null",*Junk);
+#     writeLine("serverLog","called makethumb.sh on *phyPath");
+   }
+ }
+}
 
 # =-=-=-=-=-=-=-
 # policy controlling when a dataObject is staged to cache from archive in a compound coordinating resource

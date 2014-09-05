@@ -8,7 +8,7 @@ supervisorctl stop irodsServer
 sudo -u postgres dropdb 'ICAT'
 sudo -u postgres createdb -O postgres 'ICAT' -E UTF8 -l en_US.UTF-8 -T template0 
 sudo -u postgres psql -U postgres -d postgres -c 'GRANT ALL PRIVILEGES ON DATABASE "ICAT" TO irods'
-sudo su -c "/var/lib/irods/packaging/setup_database.sh </home/admin/dbresp" irods
+sudo tail -n+3 /home/admin/dbresp | /var/lib/irods/packaging/setup_irods.sh
 
 # stop irods background process and restart as supervisorctl process
 sudo /etc/init.d/irods stop
@@ -22,6 +22,9 @@ sudo su -c "$CALLSTRING" irods
 CALLSTRING="iadmin mkuser $IRODSUSER rodsuser"
 sudo su -c "$CALLSTRING" irods
 CALLSTRING="iadmin moduser $IRODSUSER password $IRODSUSER"
+sudo su -c "$CALLSTRING" irods
+
+CALLSTRING="iadmin mkuser anonymous rodsuser"
 sudo su -c "$CALLSTRING" irods
 
 CALLSTRING="/var/www/scripts/addfiles_$ZONENAME.sh"

@@ -1,10 +1,418 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <head>
+    <title>A Quick iRODS Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-<a href="http://danb-workstation.europa.renci.org:7480/resetA.php" target="_blank">Reset Zone A</a> 
-<br><a href="http://danb-workstation.europa.renci.org:7480/addfilesA.php" target="_blank">Add Files to Zone A</a> 
-<br><a href="http://danb-workstation.europa.renci.org:7443/idrop-web2" target="_blank">Zone A iDrop Web 2</a>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
-</body>
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+  
+    red {
+      color:#00ff00;    
+    }
+
+    a, a > code {
+        color:#1a9f7e;
+        text-decoration: none;
+      }
+
+      code {
+        -moz-border-radius: 5px;
+        -web-border-radius: 5px;
+        background-color: #ffffff;
+        border-radius: 5px;
+      }
+
+      .remark-code, .remark-inline-code {
+        font-family: 'Ubuntu Mono';
+        background-color: #ffffff;
+        color: #111111;
+        text-align: left;
+      }
+
+      .remark-code-line-highlighted     { background-color: #ffff00; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      /* Two-column layout */
+
+      .left-column {
+        color: #777;
+        width: 30%;
+        height: 92%;
+        float: left;
+      }
+      .left-column h2:last-of-type, .left-column h3:last-child {
+        color: #000;
+      }
+      .right-column {
+        width: 70%;
+        float: right;
+        padding-top: 1em;
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, inverse
+
+# A Quick iRODS Demo
+
+<br ><br ><br >
+
+
+[Renaissance Computing Institute (RENCI)](http://www.renci.org)
+
+<br ><br >
+Summer 2014 Edition
+
+---
+# About this Demo...
+
+This is a demonstration of some key features of iRODS.
+<br><br>It uses a data grid of two virtual machines, representing two separate administrative zones: "zoneA" and "zoneB".
+<br><br>Each zone has a single user: "ashok" on zoneA and "stan" on zoneB.
+
+---
+# About this Demo...
+
+This is a demonstration of some key features of iRODS.
+<br><br>For the sake of the demonstration, command-line operations are scripted using PHP.
+<br><br>Scripted operations will open a new tab in your browser, execute, and then close the new tab.
+
+---
+# About this Demo...
+
+This is a demonstration of some key features of iRODS.
+<br><br>We also use a graphical web client, iDrop Web, in this demonstration. iDrop Web links will also open in a new tab.
+
+---
+# About this Demo...
+
+This is a demonstration of some key features of iRODS.
+<br><br>Before we get started, we need to reset the iRODS installation on each virtual machine.
+<br><br>(Resetting clears the underlying database and runs a setup script. It takes about 30 seconds for each system.)
+<br>
+### Let's get started!
+<br><a href="http://danb-workstation.europa.renci.org:7080/reset_zoneA.php" target="_blank">Reset Zone A</a>
+&nbsp;&nbsp;<a href="http://danb-workstation.europa.renci.org:9080/reset_zoneB.php" target="_blank">Reset Zone B</a><br><br>
+
+---
+class: middle, center, inverse
+#What is iRODS?
+
+---
+class: center
+
+#iRODS is...<br>
+
+--
+ open source middleware<br>
+
+--
+for data discovery,<br>
+
+--
+workflow automation,<br>
+
+--
+secure collaboration,<br>
+
+--
+and data virtualization.
+
+---
+# Demo: iRODS is for data discovery.
+
+--
+iRODS user "ashok" has added several image files with metadata tags.
+
+<br><a href="http://danb-workstation.europa.renci.org:7443/idrop-web2" target="_blank">Log in to iDrop Web</a>
+
+<br><a href="http://danb-workstation.europa.renci.org:7443/idrop-web2/tags/index" target="_blank">Explore tags with iDrop Web</a>
+
+???
+# Demo 2 of 4: iRODS is for workflow automation.
+When a file is uploaded, a thumbnail is created.
+<br><br><a href="http://danb-workstation.europa.renci.org:7080/thumbnails" target="_blank">Thumbnails</a>
+(This Does Not Work Yet)
+
+---
+# Demo: iRODS is for secure collaboration.
+
+--
+The administrator of zoneB can permit users from zoneA to access files in zoneB.
+
+--
+<br><br>Authentication takes place on the user's home zone.
+
+--
+<br><br>So zone administrators can permit sharing without giving up control of authentication.
+
+---
+# Demo: iRODS is for secure collaboration.
+
+This process is called federation.
+
+--
+<br><br>Each administrator shares a zone key that is placed in a configuration file.
+
+--
+<br><br>Then a few iRODS commands tell each zone about the other zone and permitted users.
+
+```bash
+# on zoneA (1247 is the default iRODS tcp port)
+iadmin mkzone zoneB remote irodsb.idrop-web.dev.docker:1247
+iadmin mkuser stan#zoneB rodsuser
+
+# on zoneB
+iadmin mkzone zoneA remote irodsa.idrop-web.dev.docker:1247
+iadmin mkuser ashok#zoneA rodsuser
+```
+--
+.center[<br><a href="http://danb-workstation.europa.renci.org:7080/federate_zoneA.php" target="_blank">Enable Federation A->B</a>
+&nbsp;&nbsp;<a href="http://danb-workstation.europa.renci.org:9080/federate_zoneB.php" target="_blank">Enable Federation B->A</a>
+<br><br><a href="http://danb-workstation.europa.renci.org:7443/idrop-web2/browse/index#treeView=path&treeViewPath=/&absPath=/zoneB/home/stan/images/&browseOptionVal=info" target="_blank">iDrop Web</a>]
+
+---
+# Demo: iRODS is for data virtualization.
+
+iRODS virtualizes data storage resources.
+
+--
+<br><br>Users get a consistent interface to different file systems, NFS mounts, Amazon S3 buckets... and many other data containers.
+
+---
+# Demo: iRODS is for data virtualization.
+
+iRODS virtualizes data storage resources.
+
+"Composable resources" make it easy to distribute and replicate data to multiple resources.
+
+--
+<br><br>Now it's easy to migrate data between equipment.
+
+###.red[.center[You are no longer subject to storage vendor lock-in.]]
+
+---
+# Demo: iRODS is for data virtualization.
+
+In this demonstration, demoResc is our legacy filestore, and newResc is our new storage resource.
+
+.center[<img src="slide_images/repl2.png" width=40%><br>]
+
+```bash
+iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc replResc replication
+iadmin addchildtoresc replResc $demoResc
+iadmin addchildtoresc replResc $newResc
+iadmin modresc replResc rebalance
+iadmin rmchildfromresc replResc $demoResc
+iadmin rmchildfromresc replResc $newResc
+iadmin rmresc replResc
+itrim -rM -N 1 -S $demoResc /$zoneName
+iadmin rmresc $demoResc
+```
+
+---
+# Demo: iRODS is for data virtualization.
+
+First, we tell iRODS about newResc.
+
+.center[<img src="slide_images/repl2.png" width=40%><br>]
+
+```bash
+*iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc replResc replication
+iadmin addchildtoresc replResc $demoResc
+iadmin addchildtoresc replResc $newResc
+iadmin modresc replResc rebalance
+iadmin rmchildfromresc replResc $demoResc
+iadmin rmchildfromresc replResc $newResc
+iadmin rmresc replResc
+itrim -rM -N 1 -S $demoResc /$zoneName
+iadmin rmresc $demoResc
+```
+
+---
+# Demo: iRODS is for data virtualization.
+
+Next, we set up a replication resource, replResc, and build a tree with demoResc and newResc.
+
+.center[<img src="slide_images/repl3.png" width=40%><br>]
+
+```bash
+iadmin mkresc $newResc 'unixfilesystem' $newPath
+*iadmin mkresc replResc replication
+*iadmin addchildtoresc replResc $demoResc
+*iadmin addchildtoresc replResc $newResc
+iadmin modresc replResc rebalance
+iadmin rmchildfromresc replResc $demoResc
+iadmin rmchildfromresc replResc $newResc
+iadmin rmresc replResc
+itrim -rM -N 1 -S $demoResc /$zoneName
+iadmin rmresc $demoResc
+```
+
+---
+# Demo: iRODS is for data virtualization.
+
+Then, we rebalance to synchronize files across the tree.
+
+.center[<img src="slide_images/repl3.png" width=40%><br>]
+
+```bash
+iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc replResc replication
+iadmin addchildtoresc replResc $demoResc
+iadmin addchildtoresc replResc $newResc
+*iadmin modresc replResc rebalance
+iadmin rmchildfromresc replResc $demoResc
+iadmin rmchildfromresc replResc $newResc
+iadmin rmresc replResc
+itrim -rM -N 1 -S $demoResc /$zoneName
+iadmin rmresc $demoResc
+```
+
+---
+# Demo: iRODS is for data virtualization.
+
+Now that we've rebalanced, we can dismantle the tree.
+
+.center[<img src="slide_images/repl5.png" width=40%><br>]
+
+```bash
+iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc replResc replication
+iadmin addchildtoresc replResc $demoResc
+iadmin addchildtoresc replResc $newResc
+iadmin modresc replResc rebalance
+*iadmin rmchildfromresc replResc $demoResc
+*iadmin rmchildfromresc replResc $newResc
+*iadmin rmresc replResc
+itrim -rM -N 1 -S $demoResc /$zoneName
+iadmin rmresc $demoResc
+```
+
+---
+# Demo: iRODS is for data virtualization.
+
+And finally, we can repurpose demoResc.
+
+.center[<img src="slide_images/repl6.png" width=40%><br>]
+
+```bash
+iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc replResc replication
+iadmin addchildtoresc replResc $demoResc
+iadmin addchildtoresc replResc $newResc
+iadmin modresc replResc rebalance
+iadmin rmchildfromresc replResc $demoResc
+iadmin rmchildfromresc replResc $newResc
+iadmin rmresc replResc
+*itrim -rM -N 1 -S $demoResc /$zoneName
+*iadmin rmresc $demoResc
+```
+---
+.center[<a href="http://danb-workstation.europa.renci.org:7080/migratedemonew_zoneA.php" target="_blank">Migrate from demoResc to newResc</a>
+<br><br><a href="http://danb-workstation.europa.renci.org:7443/idrop-web2/browse/index#treeView=detect&treeViewPath=&absPath=/zoneA/home/ashok/images/ddn.jpg&browseOptionVal=info" target="_blank">iDrop Web</a>
+<br><br><a href="http://danb-workstation.europa.renci.org:7080/migratenewdemo_zoneA.php" target="_blank">Migrate from newResc to demoResc</a>
+<br><br><br><br><br><br>]
+```bash
+iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc replResc replication
+iadmin addchildtoresc replResc $demoResc
+iadmin addchildtoresc replResc $newResc
+iadmin modresc replResc rebalance
+iadmin rmchildfromresc replResc $demoResc
+iadmin rmchildfromresc replResc $newResc
+iadmin rmresc replResc
+*itrim -rM -N 1 -S $demoResc /$zoneName
+*iadmin rmresc $demoResc
+```
+
+---
+class: center
+
+#iRODS is...<br>
+
+open source middleware<br>
+for data discovery,<br>
+workflow automation,<br>
+secure collaboration,<br>
+and data virtualization.
+
+---
+Last Slide. Acknowledgment.
+
+    </textarea>
+    <script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+</script>
+
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
 </html>
