@@ -132,7 +132,7 @@ Summer 2014 Edition
 # About this Demo...
 
 This is a demonstration of some key features of iRODS.
-<br><br>It uses a data grid of two virtual machines, representing two separate administrative zones: "zoneA" and "zoneB".
+<br><br>It uses a set of two virtual machines, representing two separate administrative zones: "zoneA" and "zoneB".
 <br><br>Each zone has a single user: "alice" on zoneA and "stan" on zoneB.
 
 ---
@@ -264,7 +264,7 @@ In this demonstration, demoResc is our legacy filestore, and newResc is our new 
 .center[<img src="slide_images/repl2.png" width=50%><br>]
 
 ```bash
-iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc $newResc unixfilesystem $newPath
 iadmin mkresc replResc replication
 iadmin addchildtoresc replResc $demoResc
 iadmin addchildtoresc replResc $newResc
@@ -284,7 +284,7 @@ First, we tell iRODS about newResc.
 .center[<img src="slide_images/repl2.png" width=50%><br>]
 
 ```bash
-*iadmin mkresc $newResc 'unixfilesystem' $newPath
+*iadmin mkresc $newResc unixfilesystem $newPath
 iadmin mkresc replResc replication
 iadmin addchildtoresc replResc $demoResc
 iadmin addchildtoresc replResc $newResc
@@ -304,7 +304,7 @@ Next, we set up a replication resource, replResc, and build a tree with demoResc
 .center[<img src="slide_images/repl3.png" width=50%><br>]
 
 ```bash
-iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc $newResc unixfilesystem $newPath
 *iadmin mkresc replResc replication
 *iadmin addchildtoresc replResc $demoResc
 *iadmin addchildtoresc replResc $newResc
@@ -325,7 +325,7 @@ Then, we "rebalance" to synchronize files across the tree.
 .center[<img src="slide_images/repl3.png" width=50%><br>]
 
 ```bash
-iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc $newResc unixfilesystem $newPath
 iadmin mkresc replResc replication
 iadmin addchildtoresc replResc $demoResc
 iadmin addchildtoresc replResc $newResc
@@ -345,10 +345,10 @@ Rebalance is a generic function name that applies differently to each different 
 
 Now that we've rebalanced, we can dismantle the tree.
 <br><br>
-.center[<img src="slide_images/repl5.png" width=50%><br>]
+.center[<img src="slide_images/repl2.png" width=50%><br>]
 
 ```bash
-iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc $newResc unixfilesystem $newPath
 iadmin mkresc replResc replication
 iadmin addchildtoresc replResc $demoResc
 iadmin addchildtoresc replResc $newResc
@@ -368,7 +368,7 @@ And finally, we can repurpose demoResc.
 .center[<img src="slide_images/repl6.png" width=50%><br>]
 
 ```bash
-iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc $newResc unixfilesystem $newPath
 iadmin mkresc replResc replication
 iadmin addchildtoresc replResc $demoResc
 iadmin addchildtoresc replResc $newResc
@@ -387,7 +387,7 @@ iadmin rmresc replResc
 <br><br><a href="http://template.example.org:7080/migratenewdemo_zoneA.php" target="_blank">Migrate from newResc to demoResc</a>
 <br><br><br><br>]
 ```bash
-iadmin mkresc $newResc 'unixfilesystem' $newPath
+iadmin mkresc $newResc unixfilesystem $newPath
 iadmin mkresc replResc replication
 iadmin addchildtoresc replResc $demoResc
 iadmin addchildtoresc replResc $newResc
@@ -413,7 +413,7 @@ and data virtualization.
 ---
 class: center, middle
 
-<img src="slide_images/iRODS-Logo.png" width=40%>
+<a href="http://irods.org"><img src="slide_images/iRODS-Logo.png" width=40%></a>
 <br><br><br><br>
 ##Thank you!
 
