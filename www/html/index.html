@@ -184,6 +184,33 @@ secure collaboration,<br>
 and data virtualization.
 
 ---
+# iRODS is for data discovery.
+
+Files in iRODS can be "tagged" with metadata.
+
+--
+<br><br>Metadata can be automatically applied or user-generated.
+
+--
+<br><br>This allows users to find files easily.
+
+--
+<br><br>Or to track processing steps applied to a file.
+
+--
+<br><br>Or to apply and use any related information not included in the file.
+
+---
+# iRODS is for data discovery.
+
+Files in iRODS can be "tagged" with metadata.
+
+<br>Administrators can use metadata to control policy.
+
+--
+<br><br>Like archiving and access control policies.
+
+---
 # Demo: iRODS is for data discovery.
 
 --
@@ -200,16 +227,25 @@ When a file is uploaded, a thumbnail is created.
 (This Does Not Work Yet)
 
 ---
-# Demo: iRODS is for secure collaboration.
+# iRODS is for secure collaboration.
 
---
-The administrator of zoneB can permit users from zoneA to access files in zoneB.
+The administrator of a zone can permit users from another zone to access files in his zone.
 
 --
 <br><br>Authentication takes place on the user's home zone.
 
+---
+# iRODS is for secure collaboration.
+
+Users access shared and local files from the same interface.
+
 --
-<br><br>So zone administrators can permit sharing without giving up control of authentication.
+<br><br>The shared files and the local files look and act the same.
+
+---
+# iRODS is for secure collaboration.
+
+Because authentication occurs locally, zone administrators can permit sharing without giving up control.
 
 ---
 # Demo: iRODS is for secure collaboration.
@@ -220,7 +256,7 @@ This process is called federation.
 <br><br>Each administrator shares a zone key that is placed in a configuration file.
 
 --
-<br><br>Then a few iRODS commands tell each zone about the other zone and permitted users.
+<br><br>Then, a few iRODS commands tell each zone about the other zone and permitted users.
 
 ```bash
 # on zoneA (1247 is the default iRODS tcp port)
@@ -237,23 +273,35 @@ iadmin mkuser alice#zoneA rodsuser
 <br><br><a href="http://template.example.org:7443/idrop-web2/browse/index#treeView=path&treeViewPath=/&absPath=/zoneB/home/stan/images/&browseOptionVal=info" target="_blank">iDrop Web</a>]
 
 ---
-# Demo: iRODS is for data virtualization.
+# iRODS is for data virtualization.
 
 iRODS virtualizes data storage resources.
-
---
-<br><br>Users get a consistent interface to different file systems, NFS mounts, Amazon S3 buckets... and many other data containers.
 
 ---
-# Demo: iRODS is for data virtualization.
+# iRODS is for data virtualization.
 
 iRODS virtualizes data storage resources.
 
-"Composable resources" make it easy to distribute and replicate data to multiple resources.
+<br>Users get a consistent interface to different file systems, NFS mounts, Amazon S3 buckets... and many other data containers.
+
+---
+# iRODS is for data virtualization.
+
+iRODS virtualizes data storage resources.
+
+<br>Administrators control access and automate processes through a consistent interface.
+
+---
+# iRODS is for data virtualization.
+
+iRODS virtualizes data storage resources.
+
+<br>"Composable resources" make it easy to distribute and replicate data to multiple resources.
 
 --
-<br><br>Now it's easy to migrate data between equipment.
+<br><br>Now, it's easy to migrate data between equipment.
 
+--
 ###.red[.center[You are no longer subject to storage vendor lock-in.]]
 
 ---
