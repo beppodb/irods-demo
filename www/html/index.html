@@ -261,11 +261,10 @@ This process is called federation.
 ```bash
 # on zoneA (1247 is the default iRODS tcp port)
 iadmin mkzone zoneB remote irodsb.irods-demo.dev.docker:1247
-iadmin mkuser stan#zoneB rodsuser
+iadmin mkuser bobby#zoneB rodsuser
 
 # on zoneB
 iadmin mkzone zoneA remote irodsa.irods-demo.dev.docker:1247
-iadmin mkuser alice#zoneA rodsuser
 ```
 --
 .center[<br><a href="http://template.example.org:7080/federate_zoneA.php" target="_blank">Enable Federation A->B</a>
