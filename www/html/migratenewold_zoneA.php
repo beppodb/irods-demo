@@ -1,6 +1,6 @@
 <?php
 /* $output = shell_exec('../../reset.sh'); */
-$output = shell_exec('../scripts/migratedemonew_zoneA.sh');
+$output = shell_exec('../scripts/migratenewold_zoneA.sh');
 /* $output = posix_getpwuid(posix_geteuid());
 echo "<pre>$output[name]</pre>" */
 $output = nl2br($output);
