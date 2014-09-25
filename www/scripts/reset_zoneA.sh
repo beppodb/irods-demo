@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /
 ZONENAME="zoneA"
-IRODSUSER="alice"
+IRODSUSER="ashok"
 supervisorctl stop irodsServer
 
 # rebuild the iCAT db
@@ -17,6 +17,9 @@ supervisorctl start irodsServer
 CALLSTRING="echo -e \"y\n\" | iadmin modzone tempZone name $ZONENAME"
 sudo su -c "$CALLSTRING" irods
 CALLSTRING="sed -i 's/tempZone/$ZONENAME/' /var/lib/irods/.irods/.irodsEnv"
+sudo su -c "$CALLSTRING" irods
+
+CALLSTRING="echo -e \"y\n\" | iadmin modresc demoResc name OldStorage"
 sudo su -c "$CALLSTRING" irods
 
 CALLSTRING="iadmin mkuser $IRODSUSER rodsuser"
