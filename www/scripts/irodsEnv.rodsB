@@ -17,7 +17,7 @@ irodsHost 'irodsb.irods-demo.dev.docker'
 # iRODS server port number:
 irodsPort 1247
 # Default storage resource name:
-irodsDefResource 'demoResc'
+irodsDefResource 'OldStorage'
 # Account name:
 irodsUserName 'rods'
 # Zone:
