@@ -4,6 +4,7 @@ supervisorctl start sshd
 supervisorctl start postgresql
 supervisorctl start irodsServer
 su -c "iadmin modresc demoResc host $HOSTNAME" irods
+su -c 'echo -e "y\n" | iadmin modresc demoResc name OldStorage' irods
 su -c 'echo -e "y\n" | iadmin modzone tempZone name $ZONENAME' irods
 su -c 'sed -i "s/tempZone/$ZONENAME/" /var/lib/irods/.irods/.irodsEnv' irods
 
