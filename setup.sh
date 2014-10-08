@@ -1,6 +1,21 @@
 #!/bin/bash
+
+command_exists () {
+    local __command_name=$1
+    command -v $__command_name >/dev/null 2>&1
+}
+
+set_FQDN () {
+    if command_exists ec2metadata; then
+        FQDN=`ec2metadata --public-hostname`
+    else
+        FQDN=`hostname -A | sed -e "s/[ \t]*$//"`
+    fi
+}
+
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-FQDN=`hostname -A | sed -e "s/[ \t]*$//"`
+set_FQDN
 DOCKERIP=`/sbin/ifconfig docker0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
 NS=`cat /etc/resolv.conf  | grep -v '^#' | grep -m 1 nameserver | awk '{print $2}'`
 
