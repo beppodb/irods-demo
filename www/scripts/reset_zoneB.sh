@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /
 ZONENAME="zoneB"
-IRODSUSER="stan"
+IRODSUSER="bobby"
 supervisorctl stop irodsServer
 
 # rebuild the iCAT db
