@@ -108,15 +108,16 @@ RUN rm -fr /var/www && ln -s /home/admin/www /var/www
 
 RUN usermod -a -G admin www-data
 RUN sed -i 's/%admin ALL=(ALL) ALL/%admin ALL=(ALL) NOPASSWD:ALL/' /etc/sudoers
+RUN chmod u+s /usr/bin/sudo
 RUN mkdir /home/admin/.irods
 RUN chown admin:admin /home/admin/.irods
 
 # disable strict ACLs
 ADD ./icat/core.re /etc/irods/core.re
 RUN chown irods:irods /etc/irods/core.re
-ADD ./icat/makethumb.sh /var/lib/irods/iRODS/server/bin/cmd/makethumb.sh
-RUN chown irods:irods /var/lib/irods/iRODS/server/bin/cmd/makethumb.sh
-RUN chmod a+xr /var/lib/irods/iRODS/server/bin/cmd/makethumb.sh
+#ADD ./icat/makethumb.sh /var/lib/irods/iRODS/server/bin/cmd/makethumb.sh
+#RUN chown irods:irods /var/lib/irods/iRODS/server/bin/cmd/makethumb.sh
+#RUN chmod a+xr /var/lib/irods/iRODS/server/bin/cmd/makethumb.sh
 
 
 EXPOSE 22 80 8443 1247

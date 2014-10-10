@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "reset_zoneA.sh" >> /home/admin/reset.status
 cd /
 ZONENAME="zoneA"
 IRODSUSER="alice"

@@ -35,7 +35,7 @@ alias skydns_start='docker run -d -p '$DOCKERIP':53:53/udp --name skydns crosbym
 alias skydock_start='docker run -d -v /var/run/docker.sock:/docker.sock --name skydock crosbymichael/skydock -ttl 30 -environment dev -s /docker.sock -domain docker -name skydns'
 alias irods_build='docker build -t irods/irods-demo '$DIR/irods-docker''
 alias irods_start_A='docker run --name irodsa --env ZONENAME=zoneA -h irodsa.irods-demo.dev.docker -v '$DIR/www':/home/admin/www -p 7022:22 -p 7247:1247 -p 7443:8443 -p 7080:80 -e "hostsname=$FQDN" -e "port80=7080" -e "port8443=7443" -d --dns='$DOCKERIP' irods/irods-demo'
-alias irods_start_B='docker run --name irodsb --env ZONENAME=zoneb -h irodsb.irods-demo.dev.docker -v '$DIR/www':/home/admin/www -p 9022:22 -p 9247:1247 -p 9443:8443 -p 9080:80 -e "hostsname=$FQDN" -e "port80=9080" -e "port8443=9443" -d --dns='$DOCKERIP' irods/irods-demo'
+alias irods_start_B='docker run --name irodsb --env ZONENAME=zoneB -h irodsb.irods-demo.dev.docker -v '$DIR/www':/home/admin/www -p 9022:22 -p 9247:1247 -p 9443:8443 -p 9080:80 -e "hostsname=$FQDN" -e "port80=9080" -e "port8443=9443" -d --dns='$DOCKERIP' irods/irods-demo'
 alias irods_ssh_A='ssh -p 7022 admin@localhost'
 alias irods_ssh_B='ssh -p 9022 admin@localhost'
 alias irods_stop='docker kill irodsa; docker kill irodsb; docker rm irodsa; docker rm irodsb'
